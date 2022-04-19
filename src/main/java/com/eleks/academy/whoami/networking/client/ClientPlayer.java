@@ -1,6 +1,7 @@
 package com.eleks.academy.whoami.networking.client;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -14,12 +15,14 @@ public class ClientPlayer implements Player {
 	private Socket socket;
 	private BufferedReader reader;
 	private PrintStream writer;
+	private DataOutputStream dos;
 
 	public ClientPlayer(String name, Socket socket) throws IOException {
 		this.name = name;
 		this.socket = socket;
 		this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		this.writer = new PrintStream(socket.getOutputStream());
+		this.dos = new DataOutputStream(socket.getOutputStream());
 	}
 
 	@Override
@@ -32,8 +35,10 @@ public class ClientPlayer implements Player {
 		String question = "";
 
 		try {
-			writer.println("Ask your questinon: ");
+			System.out.println("Player: " + name + ". Ask your question.");
+			writer.println("Player: " + name + ". Ask your question.");
 			question = reader.readLine();
+			System.out.println(question);			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,12 +46,13 @@ public class ClientPlayer implements Player {
 	}
 
 	@Override
-	public String answerQuestion(String question, String character) {
+	public String answerQuestion(String question, String character, String nameAnswerer ) {
 		String answer = "";
 		
 		try {
-			writer.println("Answer second player question: " + question + "Character is:"+ character);
+			writer.println("Player: " + nameAnswerer + ". Asks: " + question + " Character is: "+ character);
 			answer = reader.readLine();
+			System.out.println(answer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,10 +64,10 @@ public class ClientPlayer implements Player {
 	public String getGuess() {
 		String answer = "";
 		
-	
 		try {
 			writer.println("Write your guess: ");
 			answer = reader.readLine();
+			System.out.println(answer);
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -74,8 +80,10 @@ public class ClientPlayer implements Player {
 		String answer = "";
 		
 		try {
-			writer.println("Are you ready to guess? ");
+			System.out.println("Player: " + name + ". Are you ready to guess? ");
+			writer.println("Player: " + name + ". Are you ready to guess? ");
 			answer = reader.readLine();
+			System.out.println(answer);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,17 +92,23 @@ public class ClientPlayer implements Player {
 	}
 
 	@Override
-	public String answerGuess(String guess, String character) {
+	public String answerGuess(String guess, String character, String nameGuesser) {
 		String answer = "";
 		
 		try {
-			writer.println("Write your answer: ");
+			writer.println("Player: " + nameGuesser + ". Guesses: Am I a " +  guess + "?");
 			answer = reader.readLine();
+			System.out.println(answer);
 		} catch (IOException e) {
 
 			e.printStackTrace();
 		}
 		return answer;
+	}
+
+	@Override
+	public boolean isLose() {
+		return false;
 	}
 
 }

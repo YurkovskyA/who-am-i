@@ -30,7 +30,23 @@ public class App {
 
 		game.initGame();
 
-		while (gameStatus) {
+		boolean turnResult;
+		boolean makeGuess;
+		
+		while (!game.isFinished()) {
+			do {
+				turnResult = game.makeTurn();}
+			while (!turnResult);
+			do {
+				makeGuess = game.guessCharacter();}
+			while (!makeGuess);						
+
+			game.changeTurn();
+		
+		}
+		
+		
+/*		while (gameStatus) {
 			boolean turnResult = game.makeTurn();
 
 			while (turnResult) {
@@ -39,6 +55,7 @@ public class App {
 			game.changeTurn();
 			gameStatus = !game.isFinished();
 		}
+*/		
 
 		server.stopServer(socket, reader);
 	}

@@ -27,7 +27,7 @@ public class ServerImpl implements Server {
 
 	@Override
 	public Game startGame() throws IOException {
-		game.addPlayer(new RandomPlayer("Bot", questions, guessess));
+		game.addPlayer(new RandomPlayer("Bot1", questions, guessess));
 		System.out.println("Server starts");
 		System.out.println("Waiting for a client connect....");
 		return game;

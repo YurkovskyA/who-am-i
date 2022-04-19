@@ -30,17 +30,17 @@ public class RandomPlayer implements Player {
 	}
 
 	@Override
-	public String answerQuestion(String question, String character) {
+	public String answerQuestion(String question, String character, String nameAnswerer) {
 		String answer = Math.random() < 0.5 ? "Yes" : "No";
-		System.out.println("Player: " + name + ". Answers: " + answer);
+		System.out.println("Player: " + nameAnswerer + ". Answers: " + answer);
 		return answer;
 	}
 	
 
 	@Override
-	public String answerGuess(String guess, String character) {
+	public String answerGuess(String guess, String character, String nameGuesser) {
 		String answer = Math.random() < 0.5 ? "Yes" : "No";
-		System.out.println("Player: " + name + ". Answers: " + answer);
+		System.out.println("Player: " + nameGuesser + ". Answers: " + answer);
 		return answer;
 	}
 
@@ -57,6 +57,9 @@ public class RandomPlayer implements Player {
 		return availableQuestions.isEmpty();
 	}
 
-	
+	@Override
+	public boolean isLose() {
+		return availableGuesses.isEmpty();
+	}
 	
 }
