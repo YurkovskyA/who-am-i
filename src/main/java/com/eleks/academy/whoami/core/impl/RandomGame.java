@@ -35,8 +35,8 @@ public class RandomGame implements Game {
 	@Override
 	public boolean makeTurn() {
 		Player currentGuesser = currentTurn.getGuesser();
-		if (currentGuesser.isReadyForGuess())
-			return true;
+//		if (currentGuesser.isReadyForGuess())
+//			return true;
 		Set<String> answers;	
 		String question = currentGuesser.getQuestion();
 		answers = currentTurn.getOtherPlayers().stream()

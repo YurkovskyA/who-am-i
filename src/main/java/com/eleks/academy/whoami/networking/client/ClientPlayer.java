@@ -8,18 +8,21 @@ import java.io.PrintStream;
 import java.net.Socket;
 
 import com.eleks.academy.whoami.core.Player;
+import com.eleks.academy.whoami.networking.server.ServerThread;
 
 public class ClientPlayer implements Player {
 
 	private String name;
 	private Socket socket;
+	private ServerThread thread;
 	private BufferedReader reader;
 	private PrintStream writer;
 	private DataOutputStream dos;
 
-	public ClientPlayer(String name, Socket socket) throws IOException {
+	public ClientPlayer(String name, Socket socket, ServerThread thread) throws IOException {
 		this.name = name;
 		this.socket = socket;
+		this.thread = thread;
 		this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		this.writer = new PrintStream(socket.getOutputStream());
 		this.dos = new DataOutputStream(socket.getOutputStream());

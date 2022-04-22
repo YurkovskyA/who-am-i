@@ -1,9 +1,10 @@
-package com.eleks.academy.whoami.core.impl;
+/*package com.eleks.academy.whoami.core.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.eleks.academy.whoami.core.Player;
+import com.eleks.academy.whoami.networking.server.ServerThread;
 
 public class RandomPlayer implements Player {
 
@@ -26,6 +27,7 @@ public class RandomPlayer implements Player {
 	public String getQuestion() {
 		String question = availableQuestions.remove(0);
 		System.out.println("Player: " + name + ". Asks: " + question);
+		
 		return question;
 	}
 
@@ -63,3 +65,4 @@ public class RandomPlayer implements Player {
 	}
 	
 }
+*/

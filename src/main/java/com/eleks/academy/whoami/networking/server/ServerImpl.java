@@ -9,7 +9,7 @@ import java.util.List;
 import com.eleks.academy.whoami.core.Game;
 import com.eleks.academy.whoami.core.Player;
 import com.eleks.academy.whoami.core.impl.RandomGame;
-import com.eleks.academy.whoami.core.impl.RandomPlayer;
+//import com.eleks.academy.whoami.core.impl.RandomPlayer;
 
 public class ServerImpl implements Server {
 
@@ -27,7 +27,7 @@ public class ServerImpl implements Server {
 
 	@Override
 	public Game startGame() throws IOException {
-		game.addPlayer(new RandomPlayer("Bot1", questions, guessess));
+//		game.addPlayer(new RandomPlayer("Bot1", questions, guessess));
 		System.out.println("Server starts");
 		System.out.println("Waiting for a client connect....");
 		return game;

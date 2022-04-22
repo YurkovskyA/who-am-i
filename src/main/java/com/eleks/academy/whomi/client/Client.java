@@ -8,87 +8,49 @@ import java.util.Scanner;
 
 public class Client {
 
-    public static void main(String[] args) {
-        try (Socket socket = new Socket("localhost", 888)){
-
-            BufferedReader input = new BufferedReader( new InputStreamReader(socket.getInputStream()));
-            
-            PrintWriter output = new PrintWriter(socket.getOutputStream(),true);
-
-            Scanner scanner = new Scanner(System.in);
-            String userInput;
-            String response;
-            String clientName = "empty";
-
-            ClientRunnable clientRun = new ClientRunnable(socket);
-
-
-            new Thread(clientRun).start();
-           
-           do {
-               
-               if (clientName.equals("empty")) {
-                    System.out.println("Enter your name ");
-                    userInput = scanner.nextLine();
-                    clientName = userInput;
-                    output.println(userInput);
-                    if (userInput.equals("exit")) {
-                        break;
-                    }
-               } 
-               else {
-                    String message = ( "(" + clientName + ")" + " message : " );
-                    System.out.println(message);
-                    userInput = scanner.nextLine();
-                    output.println(message + " " + userInput);
-                    if (userInput.equals("exit")) {
-                        //reading the input from server
-                        break;
-                    }
-                }
-
-           } while (!userInput.equals("exit"));
-                       
-        } catch (Exception e) {
-            System.out.println("Exception occured in client main: " + e.getStackTrace());
-    }
-    }
-}
-
+	public static void main(String[] args) {		
 	
-/*    private static String inputMessage;
+		try (Socket socket = new Socket("localhost", 888)) {
 
-    public static void main(String args[]) throws Exception {
+			BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			
+			PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
 
-        Socket clientSocket = new Socket("localhost", 888);
+			Scanner scanner = new Scanner(System.in);
+			String userInput;
+			String response;
+			String clientName = "empty";
 
-        DataOutputStream dos = new DataOutputStream(clientSocket.getOutputStream());
+			ClientRunnable clientRun = new ClientRunnable(socket);
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			new Thread(clientRun).start();
 
-        BufferedReader kb = new BufferedReader(new InputStreamReader(System.in));
+			if (clientName.equals("empty")) {
+				System.out.println("Enter your name ");
+				userInput = scanner.nextLine();
+				clientName = userInput;
+				output.println(userInput);
+			}
+				
+			if (input.readLine() == "Start the game.");
+			 
+			do {
+				if (input.readLine() == clientName) {
+					String message = ("(" + clientName + ")" + " message : ");
+					System.out.println(message);
+					userInput = scanner.nextLine();
+					output.println(message + " " + userInput);
+					if (userInput.equals("exit")) {
+						break;					
+					}
 
-        PrintStream ps = new PrintStream(clientSocket.getOutputStream());
+				}
+			} while (!input.readLine().equals("exit"));
 
-        String str;
-        
-        String playerName = "";
-        
-        boolean isName = true;
-
-        System.out.println("Enter your name:");
-
-        while (!(str = kb.readLine()).equals("exit")) {
-            dos.writeBytes((isName ? "" : "Player: " + playerName) + (isName ? "" : ". ") + str + "\n");	
-            if (isName){ 
-            	playerName = str; 	
-            	isName = false;
-            	}
-        }    
-        dos.close();
-        br.close();
-        kb.close();
-        clientSocket.close();
-    }
-*/    
-
+		} 
+			
+		catch (Exception e) {
+			System.out.println("Exception occured in client main: " + e.getStackTrace());
+		}
+	}
+}
